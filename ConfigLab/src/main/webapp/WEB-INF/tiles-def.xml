@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+   "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="mainTemplate" template="/template/mainTemplate.jsp" />
+
+	<definition name="configLab" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/configLab.jsp" />
+	</definition>
+
+	<definition name="carreFour" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/carreFour.jsp" />
+	</definition>
+
+	<definition name="bouygues" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/bouygues.jsp" />
+	</definition>
+
+	<definition name="eLeclerc" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/eLeclerc.jsp" />
+	</definition>
+
+	<definition name="lab004" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab004.jsp" />
+	</definition>
+
+	<definition name="lab005" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab005.jsp" />
+	</definition>
+
+	<definition name="lab006" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab006.jsp" />
+	</definition>
+	
+	<definition name="lab007" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab007.jsp" />
+	</definition>
+	
+	<definition name="lab008" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab008.jsp" />
+	</definition>
+	<definition name="lab008V2" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab008V2.jsp" />
+	</definition>
+
+	<definition name="monitor" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/monitor.jsp" />
+	</definition>
+
+	<definition name="loginForm" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/login.jsp" />
+	</definition>
+
+	<definition name="homePage" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/home.jsp" />
+	</definition>
+
+	<definition name="loginRedirect" extends="mainTemplate">
+		<put-attribute name="body" value="/login_redirect.jsp" />
+	</definition>
+	
+	<definition name="lab009" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab009.jsp"/>
+	</definition>
+	
+	<definition name="lab009module" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab009module.jsp"/>
+	</definition>
+	
+	<definition name="createLab009" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/createPerial.jsp"/>
+	</definition>
+	<definition name="lab010" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab010.jsp"/>
+	</definition>
+	<definition name="createLab010IdexSite" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/createLab010IdexSite.jsp"/>
+	</definition>
+	<definition name="lab010IdexEnergySupplier" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab010IdexEnergySupplier.jsp"/>
+	</definition>
+	<definition name="lab010SubCategory" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab010SubCategory.jsp"/>
+	</definition>
+	<definition name="lab010Releves" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab010IdexReleves.jsp"/>
+	</definition>
+	<definition name="configIdex" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/configIdex.jsp"/>
+	</definition>
+	
+	<definition name="configConfident" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/configConfident.jsp"/>
+	</definition>
+	
+	<definition name="uploadReport" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/uploadReport.jsp"/>
+	</definition>
+	
+	<definition name="lab011Caloon" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/loadUser.jsp"/>
+	</definition>
+	
+	<definition name="lab011ResidentConfig" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab011ResidentConfig.jsp"/>
+	</definition>
+	
+	<definition name="lab011UserCaloon" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/createUser.jsp"/>
+	</definition>
+	
+	<definition name="lab011SyndicConfig" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab011SyndicConfig.jsp"/>
+	</definition>
+	
+	<definition name="lab011RangeConfig" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab011Range.jsp"/>
+	</definition>
+	
+	<definition name="lab011ConfigTemp" extends="mainTemplate">
+		<put-attribute name="body" value="/jsp/lab011ConfigTemperature.jsp"/>
+	</definition>
+	
+
+</tiles-definitions>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+   "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="mainTemplate" template="/template/mainTemplate.jsp"/>
+	
+	<definition name="eLeclercHome" template="/jsp/eLeclercHome.jsp">
+<!-- 		<put-attribute name="title" value="Lab" /> -->
+<!-- 		<put-attribute name="body" value="/jsp/eLeclercHome.jsp" /> -->
+	</definition>
+	
+	<definition name="eLeclercDriveHome" template="/jsp/eLeclercDriveHome.jsp">
+<!-- 		<put-attribute name="title" value="Lab" /> -->
+<!-- 		<put-attribute name="body" value="/jsp/eLeclercDriveHome.jsp" /> -->
+	</definition>
+	
+	<definition name="loginForm" extends="mainTemplate">
+		<put-attribute name="title" value="Login ELeclerc" />
+		<put-attribute name="body" value="/jsp/login.jsp" />
+	</definition>
+	
+	<definition name="loginRedirect" extends="mainTemplate">
+		<put-attribute name="title" value="Lab" />
+		<put-attribute name="body" value="/login_redirect.jsp" />
+	</definition>
+	
+
+</tiles-definitions>

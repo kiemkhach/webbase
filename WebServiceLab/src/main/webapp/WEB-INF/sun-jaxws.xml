@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+  <endpoint name="soapLab" implementation="com.ifi.soap.ReportWS" url-pattern="/soapLab" ></endpoint>
+  <endpoint name="soapLab007" implementation="com.ifi.soap.Lab007SOAP" url-pattern="/soapLab007" ></endpoint>
+</endpoints>

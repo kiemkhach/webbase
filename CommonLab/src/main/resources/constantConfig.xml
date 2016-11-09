@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	 http://www.springframework.org/schema/context
+	 http://www.springframework.org/schema/context/spring-context-2.5.xsd
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+     http://www.springframework.org/schema/jee
+     http://www.springframework.org/schema/jee/spring-jee-2.5.xsd">
+
+	<!-- core properties -->
+	<bean id="m2mcorePropertyConfigurerBean" class="com.ifi.common.util.M2mcorePropertyConfigurer">
+		<property name="location">
+			<value>file:/home/lab/labconfig/integration_config.properties</value>
+<!--  			<value>file:D:/Project/labteam/config/integration_config.properties</value>  -->
+		</property>
+	</bean>
+
+	<bean id="propertiesDataBean" class="com.ifi.common.util.PropertiesData">
+		<property name="rangeFile">
+				<value>/home/lab/labconfig/range_config.properties</value>
+<!-- 			<value>D:/Project/labteam/config/integration_config.properties</value>  -->
+		</property>
+	</bean>
+
+	<bean id="m2mcorePropertiesReaderBean" class="com.ifi.common.util.PropertiesReader">
+		<property name="configuer" ref="m2mcorePropertyConfigurerBean" />
+	</bean>
+</beans>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="messages" />
+
+	<package name="public" namespace="/public" extends="struts-default,json-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+			<result-type name="stringResult" class="com.energisme.result.StringInfoResult" />
+			<result-type name="imageResult" class="com.energisme.result.ImageResult" />
+		</result-types>
+
+<!-- 		<interceptors> -->
+<!-- 			<interceptor name="localeInterceptor" -->
+<!-- 				class="com.energisme.interceptor.LocaleInterceptor"></interceptor> -->
+<!-- 			<interceptor-stack name="myStack"> -->
+<!-- 				<interceptor-ref name="localeInterceptor" /> -->
+<!-- 				<interceptor-ref name="defaultStack" /> -->
+<!-- 			</interceptor-stack> -->
+<!-- 		</interceptors> -->
+
+<!-- 		<default-interceptor-ref name="myStack" /> -->
+
+		<global-results>
+			<result name="error" type="tiles">loginRedirect</result>
+		</global-results>
+		
+		<global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+        
+		<action name="login" class="login" method="execute">
+			<result name="loginForm" type="tiles">loginForm</result>
+		</action>
+
+		<action name="authentification" class="login" method="doCheckLogin">
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">eLeclerc</param>
+				<param name="siteId">${siteId}</param>
+			</result>
+			<result name="error" type="tiles">loginForm</result>
+		</action>
+
+		<action name="loadIconUri" class="com.energisme.action.ELeclercAction"
+			method="loadIconUri">
+			<result name="uri" type="imageResult"></result>
+		</action>
+
+	</package>
+
+	<package name="private" extends="struts-default,json-default"
+		namespace="/private">
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+			<result-type name="imageResult" class="com.energisme.result.ImageResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="authInterceptor"
+				class="com.energisme.interceptor.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="myStack" />
+		
+		<global-results>
+			<result name="error" type="tiles">loginRedirect</result>
+		</global-results>
+		
+		<global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+
+		<action name="eLeclerc" class="com.energisme.action.ELeclercAction"
+			method="execute">
+			<result name="success" type="tiles">eLeclercHome</result>
+			<result name="error" type="redirectAction">
+				<param name="namespace">/public</param>
+				<param name="actionName">login</param>
+			</result>
+		</action>
+		
+		<!-- Eleclerc Drive -->
+		<action name="eleclercDrive" class="com.energisme.action.EleclercDriveAction">
+			<result name="success" type="tiles">eLeclercDriveHome</result>
+			<result name="error" type="redirectAction">
+				<param name="namespace">/public</param>
+				<param name="actionName">login</param>
+			</result>
+		</action>
+		<action name="downloadBackLog" class="com.energisme.action.ELeclercAction"
+			method="downloadBackLog">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="downloadReport" class="com.energisme.action.EleclercDriveAction"
+			method="exportReport">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+
+		<action name="logOut" class="login" method="logOut">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/public</param>
+				<param name="actionName">login</param>
+			</result>
+		</action>
+		<action name="loadLogo" class="com.energisme.action.ELeclercAction"
+			method="loadLogo">
+			<result name="logo" type="imageResult"></result>
+		</action>
+	</package>
+
+</struts>

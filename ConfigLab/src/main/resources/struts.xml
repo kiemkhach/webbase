@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="messages" />
+	<constant name="struts.multipart.maxSize" value="1000000000" />
+
+	<package name="public" namespace="/public" extends="struts-default,json-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+			<result-type name="stringResult" class="com.energisme.result.StringInfoResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="myStack" />
+
+		<global-results>
+			<result name="error" type="tiles">loginForm</result>
+		</global-results>
+
+		<action name="login" class="login" method="execute">
+			<result name="loginForm" type="tiles">loginForm</result>
+		</action>
+
+		<action name="authentification" class="login" method="doCheckLogin">
+			<interceptor-ref name="defaultStack" />
+
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">home</param>
+			</result>
+			<result name="error" type="tiles">loginForm</result>
+		</action>
+
+	</package>
+
+	<package name="private" extends="struts-default,json-default"
+		namespace="/private">
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+			<result-type name="stringResult" class="com.energisme.result.StringInfoResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="authInterceptor"
+				class="com.energisme.interceptor.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="myStack" />
+
+		<global-results>
+			<result name="error" type="redirectAction">
+				<param name="namespace">/public</param>
+				<param name="actionName">login</param>
+			</result>
+		</global-results>
+
+		<!-- <global-exception-mappings> -->
+		<!-- <exception-mapping exception="java.lang.Exception" -->
+		<!-- result="error" /> -->
+		<!-- </global-exception-mappings> -->
+
+		<action name="logOut" class="login" method="logOut">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/public</param>
+				<param name="actionName">login</param>
+			</result>
+			<result name="loginForm" type="tiles">loginForm</result>
+		</action>
+
+		<action name="home" class="login" method="home">
+			<result name="success" type="tiles">homePage</result>
+		</action>
+
+		<action name="redirectLab001" class="carrefour" method="redirect">
+			<result name="success" type="tiles">carreFour</result>
+		</action>
+		<action name="selectSiteLab001" class="carrefour" method="execute">
+			<result name="success" type="tiles">carreFour</result>
+		</action>
+		<action name="configLab001" class="carrefour" method="save">
+			<result name="success" type="tiles">carreFour</result>
+		</action>
+		<action name="registerUserForLab001" class="carrefour" method="registerUser">
+			<result name="success" type="tiles">carreFour</result>
+		</action>
+		<action name="unregisterUserForLab001" class="carrefour"
+			method="unregisterUser">
+			<result name="success" type="tiles">carreFour</result>
+		</action>
+		<action name="createConfigLab001" class="carrefour" method="create">
+			<result name="success" type="tiles">carreFour</result>
+		</action>
+		<action name="cancelConfigLab001" class="carrefour" method="redirect">
+			<result name="success" type="tiles">carreFour</result>
+		</action>
+		<action name="deleteConfigLab001" class="carrefour" method="delete">
+			<result name="success" type="tiles">carreFour</result>
+		</action>
+
+		<action name="redirectLab002" class="bouygues" method="redirect">
+			<result name="success" type="tiles">bouygues</result>
+		</action>
+		<action name="selectSiteLab002" class="bouygues" method="execute">
+			<result name="success" type="tiles">bouygues</result>
+		</action>
+		<action name="configLab002" class="bouygues" method="save">
+			<result name="success" type="tiles">bouygues</result>
+		</action>
+		<action name="registerUserForLab002" class="bouygues" method="registerUser">
+			<result name="success" type="tiles">bouygues</result>
+		</action>
+		<action name="unregisterUserForLab002" class="bouygues" method="unregisterUser">
+			<result name="success" type="tiles">bouygues</result>
+		</action>
+		<action name="createConfigLab002" class="bouygues" method="create">
+			<result name="success" type="tiles">bouygues</result>
+		</action>
+		<action name="cancelConfigLab002" class="bouygues" method="redirect">
+			<result name="success" type="tiles">bouygues</result>
+		</action>
+		<action name="deleteConfigLab002" class="bouygues" method="delete">
+			<result name="success" type="tiles">bouygues</result>
+		</action>
+
+		<action name="redirectLab003" class="eleclerc" method="redirect">
+			<result name="success" type="tiles">eLeclerc</result>
+		</action>
+		<action name="selectSiteLab003" class="eleclerc" method="execute">
+			<result name="success" type="tiles">eLeclerc</result>
+		</action>
+		<action name="configLab003" class="eleclerc" method="save">
+			<result name="success" type="tiles">eLeclerc</result>
+		</action>
+		<action name="registerUserForLab003" class="eleclerc" method="registerUser">
+			<result name="success" type="tiles">eLeclerc</result>
+		</action>
+		<action name="unregisterUserForLab003" class="eleclerc" method="unregisterUser">
+			<result name="success" type="tiles">eLeclerc</result>
+		</action>
+		<action name="createConfigLab003" class="eleclerc" method="create">
+			<result name="success" type="tiles">eLeclerc</result>
+		</action>
+		<action name="cancelConfigLab003" class="eleclerc" method="redirect">
+			<result name="success" type="tiles">eLeclerc</result>
+		</action>
+		<action name="deleteConfigLab003" class="eleclerc" method="delete">
+			<result name="success" type="tiles">eLeclerc</result>
+		</action>
+
+		<action name="redirectLab004" class="lab004" method="redirect">
+			<result name="success" type="tiles">lab004</result>
+		</action>
+		<action name="selectSiteLab004" class="lab004" method="execute">
+			<result name="success" type="tiles">lab004</result>
+		</action>
+		<action name="configLab004" class="lab004" method="save">
+			<result name="success" type="tiles">lab004</result>
+		</action>
+		<action name="registerUserForLab004" class="lab004" method="registerUser">
+			<result name="success" type="tiles">lab004</result>
+		</action>
+		<action name="unregisterUserForLab004" class="lab004" method="unregisterUser">
+			<result name="success" type="tiles">lab004</result>
+		</action>
+		<action name="configLab004Line" class="lab004" method="saveLine">
+			<result name="success" type="tiles">lab004</result>
+		</action>
+		<action name="createConfigLab004" class="lab004" method="create">
+			<result name="success" type="tiles">lab004</result>
+		</action>
+		<action name="cancelConfigLab004" class="lab004" method="redirect">
+			<result name="success" type="tiles">lab004</result>
+		</action>
+		<action name="deleteConfigLab004" class="lab004" method="delete">
+			<result name="success" type="tiles">lab004</result>
+		</action>
+
+		<action name="redirectLab005" class="lab005" method="redirect">
+			<result name="success" type="tiles">lab005</result>
+		</action>
+		<action name="selectSiteLab005" class="lab005" method="execute">
+			<result name="success" type="tiles">lab005</result>
+		</action>
+		<action name="configLab005" class="lab005" method="save">
+			<result name="success" type="tiles">lab005</result>
+		</action>
+		<action name="registerUserForLab005" class="lab005" method="registerUser">
+			<result name="success" type="tiles">lab005</result>
+		</action>
+		<action name="unregisterUserForLab005" class="lab005" method="unregisterUser">
+			<result name="success" type="tiles">lab005</result>
+		</action>
+		<action name="createConfigLab005" class="lab005" method="create">
+			<result name="success" type="tiles">lab005</result>
+		</action>
+		<action name="cancelConfigLab005" class="lab005" method="redirect">
+			<result name="success" type="tiles">lab005</result>
+		</action>
+		<action name="deleteConfigLab005" class="lab005" method="delete">
+			<result name="success" type="tiles">lab005</result>
+		</action>
+
+		<action name="redirectMonitor" class="monitor" method="redirect">
+			<result name="success" type="tiles">monitor</result>
+		</action>
+		<action name="saveMonitor" class="monitor" method="save">
+			<result name="success" type="tiles">monitor</result>
+		</action>
+
+		<action name="redirectLab006" class="lab006" method="redirect">
+			<result name="success" type="tiles">lab006</result>
+		</action>
+		<action name="selectSiteLab006" class="lab006" method="execute">
+			<result name="success" type="tiles">lab006</result>
+		</action>
+		<action name="configLab006" class="lab006" method="save">
+			<result name="success" type="tiles">lab006</result>
+		</action>
+		<action name="registerUserForLab006" class="lab006" method="registerUser">
+			<result name="success" type="tiles">lab006</result>
+		</action>
+		<action name="unregisterUserForLab006" class="lab006" method="unregisterUser">
+			<result name="success" type="tiles">lab006</result>
+		</action>
+		<action name="createConfigLab006" class="lab006" method="create">
+			<result name="success" type="tiles">lab006</result>
+		</action>
+		<action name="cancelConfigLab006" class="lab006" method="redirect">
+			<result name="success" type="tiles">lab006</result>
+		</action>
+		<action name="deleteConfigLab006" class="lab006" method="delete">
+			<result name="success" type="tiles">lab006</result>
+		</action>
+		<!-- Start Config lab 006 client -->
+		<action name="getLab006ClientById" class="lab006Client" method="getClientById">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="removeLab006Client" class="lab006Client" method="deleteClient">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="uploadClientFiles" class="lab006Client" method="uploadFiles">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="saveLab006Client" class="lab006Client" method="saveClient">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<!--End config lab 006 client -->
+
+		<action name="redirectLab007" class="lab007" method="redirect">
+			<result name="success" type="tiles">lab007</result>
+		</action>
+		<action name="selectSiteLab007" class="lab007" method="execute">
+			<result name="success" type="tiles">lab007</result>
+		</action>
+		<action name="configLab007" class="lab007" method="save">
+			<result name="success" type="tiles">lab007</result>
+		</action>
+		<action name="registerUserForLab007" class="lab007" method="registerUser">
+			<result name="success" type="tiles">lab007</result>
+		</action>
+		<action name="unregisterUserForLab007" class="lab007" method="unregisterUser">
+			<result name="success" type="tiles">lab007</result>
+		</action>
+		<action name="createConfigLab007" class="lab007" method="create">
+			<result name="success" type="tiles">lab007</result>
+		</action>
+		<action name="cancelConfigLab007" class="lab007" method="redirect">
+			<result name="success" type="tiles">lab007</result>
+		</action>
+		<action name="deleteConfigLab007" class="lab007" method="delete">
+			<result name="success" type="tiles">lab007</result>
+		</action>
+
+		<!--Start config lab 008 -->
+		<action name="redirectLab008" class="lab008" method="redirect">
+			<result name="success" type="tiles">lab008</result>
+		</action>
+		<action name="selectSiteLab008" class="lab008" method="execute">
+			<result name="success" type="tiles">lab008</result>
+		</action>
+		<action name="configLab008" class="lab008" method="save">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab008</param>
+				<param name="siteId">${siteId}</param>
+				<param name="mes">${mes}</param>
+			</result>
+		</action>
+		<action name="registerUserForLab008" class="lab008" method="registerUser">
+			<result name="success" type="tiles">lab008</result>
+		</action>
+		<action name="unregisterUserForLab008" class="lab008" method="unregisterUser">
+			<result name="success" type="tiles">lab008</result>
+		</action>
+		<action name="createConfigLab008" class="lab008" method="create">
+			<result name="success" type="tiles">lab008</result>
+		</action>
+		<action name="cancelConfigLab008" class="lab008" method="redirect">
+			<result name="success" type="tiles">lab008</result>
+		</action>
+		<action name="deleteConfigLab008" class="lab008" method="delete">
+			<result name="success" type="tiles">lab008</result>
+		</action>
+		<action name="importlab008BoilerInfoFrCsv" class="lab008"
+			method="importlab008BoilerInfoFrCsv">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab008</param>
+				<param name="siteId">${siteImport}</param>
+				<param name="mes">${mes}</param>
+			</result>
+		</action>
+		<action name="importlab008TrefFrCsv" class="lab008"
+			method="importlab008TrefFrCsv">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab008</param>
+				<param name="siteId">${siteImport}</param>
+				<param name="mes">${mes}</param>
+			</result>
+		</action>
+		<action name="importlab008PerformanceCsv" class="lab008"
+			method="importlab008PerformanceCsv">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab008</param>
+				<param name="siteId">${siteImport}</param>
+				<param name="mes">${mes}</param>
+			</result>
+		</action>
+		<action name="exportlab008BoilerInfoFrCsv" class="lab008"
+			method="exportlab008BoilerInfoFrCsv">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="BoilerInfoFrCsv.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="exportlab008TrefFrCsv" class="lab008"
+			method="exportlab008TrefFrCsv">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="TrefFrCsv.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="exportlab008PerformanceCsv" class="lab008"
+			method="exportlab008PerformanceCsv">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="PerformanceData.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<!--End config lab 008 -->
+		<!-- Start Config Lab -->
+		<action name="configLab" class="configLab" method="execute">
+			<result name="success" type="tiles">configLab</result>
+		</action>
+		<action name="getLabById" class="configLab" method="getLabById">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="updateLab" class="configLab" method="updateLab">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="saveLab" class="configLab" method="saveLab">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="deleteLab" class="configLab" method="deleteLab">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<!-- End Config Lab -->
+		<!--Start config lab 008 Ver2 -->
+		<action name="redirectLab008V2" class="lab008V2" method="redirect">
+			<result name="success" type="tiles">lab008V2</result>
+		</action>
+		<action name="selectSiteLab008V2" class="lab008V2" method="execute">
+			<result name="success" type="tiles">lab008V2</result>
+		</action>
+		<!-- <action name="configLab008V2" class="lab008V2" method="save"> <result 
+			name="success" type="tiles">lab008V2</result> </action> -->
+		<action name="configLab008V2" class="lab008V2" method="save">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab008V2</param>
+				<param name="siteId">${siteId}</param>
+				<param name="mes">${mes}</param>
+			</result>
+			<result name="error" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">createConfigLab008V2</param>
+				<param name="mes">${mes}</param>
+			</result>
+		</action>
+		<action name="registerUserForLab008V2" class="lab008V2" method="registerUser">
+			<result name="success" type="tiles">lab008V2</result>
+		</action>
+		<action name="unregisterUserForLab008V2" class="lab008V2"
+			method="unregisterUser">
+			<result name="success" type="tiles">lab008V2</result>
+		</action>
+		<action name="createConfigLab008V2" class="lab008V2" method="create">
+			<result name="success" type="tiles">lab008V2</result>
+		</action>
+		<action name="cancelConfigLab008V2" class="lab008V2" method="redirect">
+			<result name="success" type="tiles">lab008V2</result>
+		</action>
+		<action name="deleteConfigLab008V2" class="lab008V2" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab008V2</param>
+			</result>
+		</action>
+		<!--End config lab 008 Ver2 -->
+		<!-- Start Config lab8 ECS -->
+		<action name="getLab008ECSById" class="lab008ECS" method="getECSById">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="removeLab008ECS" class="lab008ECS" method="deleteECS">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="saveLab008ECS" class="lab008ECS" method="saveECS">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<!--End config lab8 ECS -->
+
+		<!-- Start Config lab009 -->
+		<action name="redirectLab009" class="lab009" method="redirect">
+			<result name="success" type="tiles">lab009</result>
+		</action>
+		<action name="selectSiteLab009" class="lab009" method="execute">
+			<result name="success" type="tiles">lab009</result>
+		</action>
+		<!-- .......................Config ClientId................. -->
+		<action name="registerPerial" class="lab009" method="registerPerial">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab009</param>
+			</result>
+		</action>
+		<action name="createConfigLab009" class="lab009" method="createConfigLab">
+			<result name="success" type="tiles">createLab009</result>
+		</action>
+		<action name="cancelConfigLab009" class="lab009" method="redirect">
+			<result name="success" type="tiles">lab009</result>
+		</action>
+		<action name="saveConfigLab009" class="lab009" method="saveConfigLab009">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">selectSiteLab009</param>
+				<param name="clientId">${clientId}</param>
+			</result>
+		</action>
+
+		<!-- ....................EnergyTypes................... -->
+		<action name="removeLab009EnergyType" class="lab009"
+			method="deleteLab009EnergyType">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="getEnergyTypesById" class="lab009" method="getEnergyTypesById">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="createLab009" class="lab009" method="create">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab009</param>
+			</result>
+		</action>
+		<action name="saveLab009Energy" class="lab009" method="saveLab009Energy">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+
+		<!-- ..................LotConsommation................................. -->
+		<action name="createLab009LotConsommation" class="lab009"
+			method="createLotConsommation">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab009</param>
+			</result>
+		</action>
+		<action name="removeLab009LotConsommation" class="lab009"
+			method="deleteLab009LotConsommation">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="getLotById" class="lab009" method="getLotById">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="saveLab009LotConsommation" class="lab009"
+			method="saveLab009LotConsommation">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+
+		<!-- ...........................Provider............................ -->
+		<action name="createLab009Provider" class="lab009" method="createProvider">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab009</param>
+			</result>
+		</action>
+		<action name="removeLab009Provider" class="lab009"
+			method="deleteLab009Provider">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="getProviderById" class="lab009" method="getProviderById">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="saveLab009Provider" class="lab009" method="saveLab009Provider">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="saveLab009Provider" class="lab009" method="saveLab009Provider">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="redirectLab009Module" class="lab009"
+			method="redirectLab009Module">
+			<result name="success" type="tiles">lab009module</result>
+		</action>
+		<action name="createLab009Module" class="lab009" method="createLab009Module">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab009Module</param>
+				<param name="clientId">${clientId}</param>
+			</result>
+		</action>
+		<action name="editLab009Module" class="lab009" method="updateLab009Module">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab009Module</param>
+				<param name="clientId">${clientId}</param>
+			</result>
+		</action>
+		<action name="removeLab009Module" class="lab009" method="deleteLab009Module">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<!-- Start Config lab010 -->
+		<action name="redirectLab010IdexSite" class="lab010IdexAction"	method="redirect">
+			<result name="success" type="tiles">lab010</result>
+		</action>
+		<action name="createConfigLab010IdexSite" class="lab010IdexAction"
+			method="create">
+			<result name="success" type="tiles">createLab010IdexSite</result>
+		</action>
+		<action name="uploadImgLab010IndexSite" class="lab010IdexAction" method="save">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success" type="tiles">lab010</result>
+		</action>
+		<action name="deleteImgLab010IndexSite" class="lab010IdexAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab010IdexSite</param>
+			</result>
+		</action>
+		<action name="configLabIdexEnergySupplier" class="lab010IdexAction"
+			method="configLabIdexEnergySupplier">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">lab010IdexEnergySupplier</param>
+			</result>
+		</action>
+		<action name="lab010IdexEnergySupplier" class="lab010IdexEnergySupplier" method="redirect">
+			<result name="success" type="tiles">lab010IdexEnergySupplier</result>
+		</action>
+		<action name="redirectLab010SubCategory" class="lab010IdexAction"
+			method="redirectLab010SubCategory">
+			<result name="success" type="tiles">lab010SubCategory</result>
+		</action>
+		<action name="redirectLab010Releves" class="lab010IdexAction"
+			method="redirectLab010Releves">
+			<result name="success" type="tiles">lab010Releves</result>
+		</action>
+		<action name="createLab010SubCategory" class="lab010IdexAction" method="createLab010SubCategory">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab010SubCategory</param>
+				<param name="idexInstallationId">${idexInstallationId}</param>
+			</result>
+		</action>
+		<action name="exportSubCategoryDetailByIdToCSV" class="lab010IdexAction"
+			method="exportSubCategoryDetailByIdToCSV">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="SubCategoryDetailById-${idexCostId}.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="exportAllSubCategoryDetailToCSV" class="lab010IdexAction"
+			method="exportAllSubCategoryDetailToCSV">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="SubCategoryDetailAll.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="importLab010SubCategoryDetailCSV" class="lab010IdexAction"
+			method="importLab010SubCategoryDetailCSV">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab010SubCategory</param>
+				<param name="idexInstallationId">${idexInstallationId}</param>
+				<param name="message">${message}</param>
+			</result>
+		</action>
+		<action name="exportLab010DJUByInstallationToCSV" class="lab010IdexAction"
+			method="exportLab010DJUByInstallationToCSV">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="DJUByInstallation-${idexInstallationId}.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="exportAllLab010DJUToCSV" class="lab010IdexAction"
+			method="exportAllLab010DJUToCSV">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="DJU-All.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="importLab010DJUByInstallation" class="lab010IdexAction"
+			method="importLab010DJUByInstallation">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab010Releves</param>
+				<param name="idexInstallationId">${idexInstallationId}</param>
+				<param name="messageReleves">${messageReleves}</param>
+			</result>
+		</action>
+		<action name="deleteLab010SubCategory" class="lab010IdexAction"
+			method="deleteLab010SubCategory">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab010SubCategory</param>
+				<param name="idexInstallationId">${idexInstallationId}</param>
+				<param name="message">${message}</param>
+			</result>
+		</action>
+		<action name="uploadImgLab010IndexEnergySupplier" class="lab010IdexEnergySupplier"	method="save">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success" type="tiles">lab010IdexEnergySupplier</result>
+		</action>
+		<action name="deleteImgLab010IndexEnergySupplier" class="lab010IdexEnergySupplier" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">lab010IdexEnergySupplier</param>
+			</result>
+		</action>
+		<!-- Config Idex -->
+		<action name="configLabIdex" class="configIdex" method="redirect">
+			<result name="success" type="tiles">configIdex</result>
+		</action>
+		<action name="saveIdexConfig" class="configIdex" method="saveIdexConfig">
+			<result name="success" type="redirectAction">
+				<param name="installationId">${installationId}</param>
+				<param name="namespace">/private</param>
+				<param name="actionName">configLabIdex</param>
+			</result>
+		</action>
+		<action name="exportRelevesByCounterIdToCSV" class="lab010IdexAction"
+			method="exportRelevesByCounterIdToCSV">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="RelevesByCounterId-${idexCounterId}.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="exportAllRelevesToCSV" class="lab010IdexAction"
+			method="exportAllRelevesToCSV">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="Releves-All-Data.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="importRelevesCSV" class="lab010IdexAction"
+			method="importRelevesCSV">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectLab010Releves</param>
+				<param name="idexInstallationId">${idexInstallationId}</param>
+				<param name="messageReleves">${messageReleves}</param>
+			</result>
+		</action>
+		<!-- 	[START]	NDLONG idex  -->
+		<action name="saveConfigConfident" class="lab010ConfigCouterAction" method="saveCounter">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">getConfigConfident</param>
+				<param name="installationId">${installationId}</param>
+				<param name="counterId">${counterId}</param>
+			</result>
+		</action>
+		
+		<action name="getConfigConfident" class="lab010ConfigCouterAction">
+			<result name="success" type="tiles">configConfident</result>
+		</action>
+		
+		<!-- 		upload -->
+		<action name="getUploadPage" class="lab010ConfigInstallationAction" method="getUploadPage">
+			<result name="success" type="tiles">uploadReport</result>
+		</action>
+		
+		<action name="uploadReport" class="lab010ConfigInstallationAction" method="uploadReport">
+<!-- 			<interceptor-ref name="fileUpload"> -->
+<!-- 				<param name="maximumSize">2097152</param> -->
+<!-- 				<param name="allowedTypes">pdf</param> -->
+<!-- 			</interceptor-ref> -->
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">getUploadPage</param>
+			</result>
+			
+		</action>
+		<!-- [END] NDLONG idex -->
+		
+		<!-- [START Caloon] -->
+		<action name="redirectCaloon" class="lab011Caloon" method="redirect">
+			<result name="success" type="tiles">lab011Caloon</result>
+		</action>
+		<action name="createUserCaloon" class="lab011Caloon" method="create">
+			<result name="success" type="tiles">lab011UserCaloon</result>
+		</action>
+		<action name="saveConfigLab011" class="lab011Caloon" method="saveNewUserCaloon">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectCaloon</param>
+			</result>
+		</action>
+		<action name="residentConfig" class="lab011Caloon" method="residentConfig">
+			<result name="success" type="tiles">lab011ResidentConfig</result>
+		</action>
+		<action name="getLab011ResidentById" class="lab011Caloon" method="getResidentById">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="saveLab011Resident" class="lab011Caloon" method="saveResident">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="removeLab011Resident" class="lab011Caloon" method="deleteLab011Resident">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="createLab011Resident" class="lab011Caloon" method="createLab011Resident">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">residentConfig</param>
+			</result>
+		</action>
+		<action name="saveUserCaloon" class="lab011Caloon" method="saveUserCaloon">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectCaloon</param>
+			</result>
+		</action>
+		<action name="deleteUserCaloon" class="lab011Caloon" method="deleteUserCaloon">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">redirectCaloon</param>
+			</result>
+		</action>
+		<action name="syndicConfig" class="lab011Caloon" method="syndicConfig">
+			<result name="success" type="tiles">lab011SyndicConfig</result>
+		</action>
+		<action name="getLab011SyndicById" class="lab011Caloon" method="getSyndicById">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="uploadFileReport" class="lab011Caloon" method="uploadFiles">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="saveLab011Syndic" class="lab011Caloon" method="saveSyndic">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="createLab011Syndic" class="lab011Caloon" method="createLab011Syndic">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">syndicConfig</param>
+			</result>
+		</action>
+		<action name="removeLab011Syndic" class="lab011Caloon" method="deleteLab011Syndic">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		
+		<action name="rangeConfig" class="lab011Caloon" method="rangeConfig">
+			<result name="success" type="tiles">lab011RangeConfig</result>
+		</action>
+		<action name="getLab011RangeById" class="lab011Caloon" method="getRangeById">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="createLab011Range" class="lab011Caloon" method="createLab011Range">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">rangeConfig</param>
+			</result>
+		</action>
+		<action name="saveLab011Range" class="lab011Caloon" method="saveRange">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="removeLab011Range" class="lab011Caloon" method="deleteLab011Range">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		
+		<action name="temperatureConfig" class="lab011Caloon" method="configTemp">
+			<result name="success" type="tiles">lab011ConfigTemp</result>
+		</action>
+		<action name="saveConfigTmp" class="lab011Caloon" method="saveConfigTmp">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/private</param>
+				<param name="actionName">temperatureConfig</param>
+			</result>
+		</action>
+	</package>
+</struts>

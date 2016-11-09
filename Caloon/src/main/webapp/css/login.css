@@ -1,0 +1,151 @@
+@font-face {
+  font-family: 'CenturyGothic';
+  src: url('../fonts/CenturyGothic.ttf') format('truetype');
+}
+html, body, .container-fluid {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+	font-family: 'CenturyGothic' !important;
+}
+.header {
+    height: 18vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo {
+    width: 20%;
+}
+.main-login {
+    width: 100%;
+    height: 82vh;
+    background: #002E6E;
+    display: flex;
+    align-items: center;
+}
+.wrapper-main {
+    width: 37%;
+    height: 75%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.login-title {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.lock-img {
+    width: 25px;
+}
+.login-title {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+.title-lock {
+    color: #fff;
+    font-size: 20px;
+    padding-left: 12px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-end;
+}
+.login-form {
+    width: 100%;
+    height: 80%;
+    background: #CCD5E2;
+}
+
+.wrapper-user-name {
+    position: relative;
+    height: 42%;
+    width: 100%;
+}
+.wrapper-user {
+    height: 100%;
+    width: 65%;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.lable-identifiant {
+    color: #223564;
+    position: relative;
+    font-size: 18px;
+    padding-top: 16%;
+    padding-bottom: 5px;
+}
+.indentifiant {
+    width: 100%;
+    margin-bottom: 8%;
+}
+input[type=text], input[type=password] {
+    font-size: 17px;
+    border-radius: 3px;
+    outline: none;
+    font-weight: bold;
+    border: 1px solid #E0E0E0;
+    width: 100%;
+    padding: 6px;
+}
+.wrapper-user-pass {
+    position: relative;
+    height: 23%;
+    width: 65%;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+.lable-pass {
+    color: #223564;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 5px;
+}
+.connextion {
+    width: 100%;
+    height: 36%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35%;
+}
+.submit {
+    color: white;
+    background: #82D56C;
+    border-radius: 5px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    padding: 10px 35px;
+    outline: none !important;
+}
+
+@media all and (max-width: 1200px){
+	.title-lock {
+	    font-size: 15px;
+	}
+}

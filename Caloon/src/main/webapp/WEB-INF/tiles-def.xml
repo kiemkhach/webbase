@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+   "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="mainTemplate" template="/template/mainTemplate.jsp">
+	</definition>
+	
+	<definition name="loginForm" template="/jsp/login.jsp">
+		<put-attribute name="title" value="" />
+	</definition>
+	
+	<definition name="residenceSite" extends="mainTemplate">
+		<put-attribute name="title" value="Welcome Residence" />
+        <put-attribute name="body" value="/jsp/residence.jsp"/>   
+	</definition>
+	
+<!-- 	<definition name="syndicSite" extends="mainTemplate"> -->
+<!-- 		 <put-attribute name="title" value="Welcome Syndic"/>  -->
+<!--          <put-attribute name="body" value="/jsp/syndic.jsp"/>    -->
+<!-- 	</definition> -->
+	<definition name="syndicSite" template="/jsp/syndic.jsp">
+		<put-attribute name="title" value="Welcome Syndic" />
+	</definition>
+</tiles-definitions>
